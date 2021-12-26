@@ -21,8 +21,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+
+
         btnDatePicker.setOnClickListener { view ->
             clickDatePicker(view)
+        }
+
+        tvTimeIn.setOnClickListener {
+
+            when (tvTimeIn.text) {
+                "DAYS" -> {
+                    tvTimeIn.setText("MINUTES")
+                }
+                "MINUTES" -> {
+                    tvTimeIn.setText("SECONDS")
+                }
+                "SECONDS" -> {
+                    tvTimeIn.setText("DAYS")
+                }
+            }
+
+
         }
 
     }
@@ -38,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             this,
             // outputs as vars from the given inputs
             DatePickerDialog.OnDateSetListener { view, selectedYear, selectedMonth, selectedDay ->
-                Toast.makeText(this, "$selectedDay/$selectedMonth/$selectedYear", Toast.LENGTH_SHORT).show();
 
                 // setting date to id in xml
                 val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
@@ -50,17 +68,62 @@ class MainActivity : AppCompatActivity() {
                 // parsing returns a date object
                 val theDate = sdf.parse(selectedDate)
 
-                // converts the date from jan 1 1970: milli seconds to minutes
-                val selectedDateInMinutes = theDate!!.time / 60000
 
-                // converts selected time to milliseconds and then mins
                 val currentDate = sdf.parse(sdf.format(System.currentTimeMillis()))
-                val currentDateToMinutes = currentDate!!.time / 60000
 
-                // getting different of selected time
-                val differenceInMinutes = currentDateToMinutes - selectedDateInMinutes
 
-                tvSelectedDateInMinutes.setText(differenceInMinutes.toString())
+                when (tvTimeIn.text) {
+
+                    "MINUTES" -> {
+                        // converts the date from jan 1 1970: milli seconds to minutes
+                        val selectedDateInMinutes = theDate!!.time / 60000
+
+                        // converts selected time to milliseconds and then mins
+                        val currentDateToMinutes = currentDate!!.time / 60000
+
+                        tvAgeIn.setText("Age In Minutes")
+                        // getting different of selected time
+                        val differenceInMinutes = currentDateToMinutes - selectedDateInMinutes
+
+                        tvSelectedDateInMinutes.setText(
+                            "%,d".format(differenceInMinutes).toString()
+                        )
+                    }
+                    "DAYS" -> {
+
+                        // converts the date from jan 1 1970: milli seconds to days
+                        val selectedDateInMinutes = theDate!!.time / 86400000
+
+                        // converts selected time to milliseconds and then mins
+                        val currentDateToMinutes = currentDate!!.time / 86400000
+
+                        tvAgeIn.setText("Age In Days")
+                        // getting different of selected time
+                        val differenceInMinutes = currentDateToMinutes - selectedDateInMinutes
+
+                        tvSelectedDateInMinutes.setText(
+                            "%,d".format(differenceInMinutes).toString()
+                        )
+                    }
+                    "SECONDS" -> {
+
+                        // converts the date from jan 1 1970: milli seconds to days
+                        val selectedDateInMinutes = theDate!!.time / 1000
+
+                        // converts selected time to milliseconds and then mins
+                        val currentDateToMinutes = currentDate!!.time / 1000
+
+                        tvAgeIn.setText("Age In Seconds")
+                        // getting different of selected time
+                        val differenceInMinutes = currentDateToMinutes - selectedDateInMinutes
+
+                        tvSelectedDateInMinutes.setText(
+                            "%,d".format(differenceInMinutes).toString()
+                        )
+                    }
+
+
+                }
 
 
             },

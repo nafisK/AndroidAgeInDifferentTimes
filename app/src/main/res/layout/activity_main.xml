@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@color/age_text_background_color"
+        android:background="@color/yellow_orange"
         android:elevation="10dp"
         android:padding="10dp"
         android:text="AGE"
@@ -41,7 +41,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="IN MINUTES"
+        android:text="IN"
+        android:textColor="@color/text_color"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.10" />
+
+    <Button
+        android:id="@+id/tvTimeIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="MINUTES"
         android:textColor="@color/text_color"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -87,6 +102,7 @@
         android:textSize="35sp" />
 
     <TextView
+        android:id="@+id/tvAgeIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Age In Minutes"
